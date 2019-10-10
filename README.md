@@ -1,4 +1,4 @@
-Welcome to the GitHub repository for JamNotJelly's note-taking web app!!!
+Welcome to the GitHub repository for JamNotJelly's note-taking web app!
 
 Our mission statement: 
 
