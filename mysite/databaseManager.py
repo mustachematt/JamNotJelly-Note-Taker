@@ -1,5 +1,5 @@
 import sqlite3
-from user import User
+from mysite.user import User
 
 connection = sqlite3.connect('user.db')
 
