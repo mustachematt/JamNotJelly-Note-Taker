@@ -1,15 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <title>Register - Jam Transcriptions</title>
-
+    <title>Jelly Lists, Digital List App</title>
     <link type="text/css" rel="stylesheet" href="design.css"/>
 
     <!--This imports the font, we can change this later-->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header>
         <!--This is the bar at the top of the site-->
@@ -18,26 +17,19 @@
 
          <ul class="nav_links">
             <!--Use this list for the main links in the nav bar-->
-            <li><a href="mynotes.html">My Notes</a></li>
-            <li><a href="account.html">Account</a></li>
+            <li><a class="nav_content" href="mynotes.html">My Notes</a></li>
+            <li><a class="nav_content" href="account.html">Account</a></li>
         </ul>
 
         <ul class="nav_links" id="right_links">
             <!--This list is for the login/register pages or anything that we want to align to the right-->
-            <li><a href="login.html">Login</a></li> |
-            <li><a href="register.html">Sign Up</a></li>
+            <li><a class="nav_content" href="login.html">Login</a></li> |
+            <li><a class="nav_content" href="register.html">Sign Up</a></li>
         </ul>
     </header>
-    <div class="login_box">
-        <h1>Login</h1>
-        <h6 style="font-size:16px;">Enter username and password.</h6><br>
-        <form>
-            Username:<br>
-            <input type="text" name="user"><br><br>
-            Password:<br>
-            <input type="password" name="pass"><br><br>
-            <input type="submit" value="Submit"><br><br>
-        </form>
+    
+    <div id="main_body">
+        <h1>Account Page</h1>
     </div>
     
 </body>
