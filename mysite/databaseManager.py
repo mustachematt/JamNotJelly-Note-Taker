@@ -9,23 +9,25 @@ cur = connection.cursor()
 # may need readded/modified to add their actual lists
 # cur.execute("""CREATE TABLE users (
 #                 username text,
+#                 email text,
 #                 password text
 #                 )""")
 
 #takes in a memeber of the user class (which has a username and password), and inserts it into the database
 def insert_user(userIn):
     with connection:
-        cur.execute("INSERT INTO users VALUES (:username, :password)", {'username': userIn.username, 'password': userIn.password})
+        cur.execute("INSERT INTO users VALUES (:username, :email, :password)", {'username': userIn.username, 
+                    'email': userIn.email, 'password': userIn.password})
 
 #takes in username and password and attempts to make a new user
 #returns true if username was not taken and inserts it, returns false is it was taken
 #will need to be updated with hashing of passwords (currently stores pw in plain text)
-def register(username, password):
+def register(username, email, password):
     with connection:
         #make sure there is not a user with that username
         cur.execute("SELECT * FROM users WHERE username=?", (username,))
         if cur.fetchall() == []: #cursor will point to an empty array if that user doesnt exist
-            newUser = User(username, password)
+            newUser = User(username, email, password)
             insert_user(newUser)
             return True
         else:

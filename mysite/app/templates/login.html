@@ -31,12 +31,18 @@
     <div class="login_box">
         <h1>Login</h1>
         <h6 style="font-size:16px;">Enter username and password.</h6><br>
-        <form>
+        <form action="" method="post" novalidate>
+            <!--generates a hidden field containing a token used to protect against CSRF attacks-->
+            {{ form.hidden_tag() }}
             Username:<br>
-            <input type="text" name="user"><br><br>
+                {{ form.username() }}<br><br>
+            <!--DELETE<input type="text" name="user" value="{{ form.username() }}"><br><br>-->
             Password:<br>
-            <input type="password" name="pass"><br><br>
-            <input type="submit" value="Submit"><br><br>
+            {{ form.password() }}<br>
+            <!--DELETE<input type="password" name="pass" value="{{ form.password() }}"><br><br>-->
+            {{ form.remember_me() }} {{ form.remember_me.label }}<br><br>
+            {{ form.submit() }}<br><br>
+            <!--DELETE<input type="submit" value="{{ form.submit() }}"><br><br>-->
         </form>
     </div>
 
