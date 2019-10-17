@@ -1,23 +1,38 @@
 import sqlite3
-from mysite.user import User
+from app.user import User, Note
 
 connection = sqlite3.connect('user.db')
 
 cur = connection.cursor()
 
-# this code was usedto create the initial db
-# may need readded/modified to add their actual lists
-# cur.execute("""CREATE TABLE users (
-#                 username text,
-#                 email text,
-#                 password text
-#                 )""")
+## this code was usedto create the initial db
+## may need readded/modified to add their actual lists
+# create users table and indices:
+'''
+cur.execute("""CREATE TABLE users (
+                user_id integer primary key autoincrement,
+                username text,
+                email text,
+                password_hash text)""")
+cur.execute("""CREATE UNIQUE INDEX idx_user_username on users (username)""")
+cur.execute("""CREATE UNIQUE INDEX idx_user_email on users (email)""")
+# create notes table and indices:
+cur.execute("""CREATE TABLE notes (
+                note_id integer primary key autoincrement,
+                body text,
+                timestamp datetime default current_timestamp,
+                user_id integer,
+                foreign key (user_id) references users (user_id)
+                    on update cascade
+                    on delete cascade)""")
+cur.execute("""CREATE INDEX idx_notes_timestamp on notes (timestamp)""")
+'''
 
 #takes in a memeber of the user class (which has a username and password), and inserts it into the database
 def insert_user(userIn):
     with connection:
-        cur.execute("INSERT INTO users VALUES (:username, :email, :password)", {'username': userIn.username, 
-                    'email': userIn.email, 'password': userIn.password})
+        cur.execute("INSERT INTO users VALUES (:username, :email)", {'username': userIn.username, 
+                    'email': userIn.email})
 
 #takes in username and password and attempts to make a new user
 #returns true if username was not taken and inserts it, returns false is it was taken

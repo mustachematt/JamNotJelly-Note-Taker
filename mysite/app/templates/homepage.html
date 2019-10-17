@@ -17,13 +17,19 @@
 
          <ul class="nav_links">
             <!--Use this list for the main links in the nav bar-->
+            {% if current_user.is_authenticated %}
             <li><a class="nav_content" href="mynotes">My Notes</a></li>
             <li><a class="nav_content" href="account">Account</a></li>
+            {% endif %}
         </ul>
 
         <ul class="nav_links" id="right_links">
             <!--This list is for the login/register pages or anything that we want to align to the right-->
-            <li><a class="nav_content" href="login">Login</a></li> |
+            {% if current_user.is_anonymous %}
+            <li><a href="{{ url_for('login') }}">Login</a></li> |
+            {% else %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> |
+            {% endif %}
             <li><a class="nav_content" href="register">Sign Up</a></li>
         </ul>
     </header>
