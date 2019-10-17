@@ -3,6 +3,10 @@ from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# these are the classes (database models)
+# SQLAlchemy handles the db translations of these classes into tables
+# and objects into rows
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -23,6 +27,8 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
+# the table exists in the db but no data yet
+# the front-end (mynotes and/or account pgs) does not yet support this
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))

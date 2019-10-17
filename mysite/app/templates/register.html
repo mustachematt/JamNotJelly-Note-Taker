@@ -18,6 +18,7 @@
 
          <ul class="nav_links">
             <!--Use this list for the main links in the nav bar-->
+            <!--These links are only visible if the user is authenticated-->
             {% if current_user.is_authenticated %}
             <li><a class="nav_content" href="mynotes">My Notes</a></li>
             <li><a class="nav_content" href="account">Account</a></li>
@@ -26,6 +27,8 @@
 
         <ul class="nav_links" id="right_links">
             <!--This list is for the login/register pages or anything that we want to align to the right-->
+            <!--If user is not authenticated, they see login link which redirects to login page-->
+            <!--If user is authenticated, they see logout link which redirects to homepage-->
             {% if current_user.is_anonymous %}
             <li><a href="{{ url_for('login') }}">Login</a></li> |
             {% else %}
