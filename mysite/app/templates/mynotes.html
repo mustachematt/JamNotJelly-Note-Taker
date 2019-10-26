@@ -38,9 +38,22 @@
     </header>
 
     <div id="main_body">
-
         <p>What would you like to keep track of? Write it below:</p>
-        <textarea name="notes" rows="20", cols="60"></textarea>
+        <form action="" method="post">
+            <!--generates a hidden field containing a token used to protect against CSRF attacks-->
+            {{ form.hidden_tag() }}
+
+            {{ form.note(cols=60, rows=20) }}<br>
+            {% for error in form.note.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {{ form.submit() }}<br><br>
+            <ul class="textarea">
+                {% for note in notes %}
+                    <li><b>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}:</b><br> {{ note.body }}</li><br>
+                {% endfor %}
+            </ul>
+        </form>
     </div>
 
 </body>
