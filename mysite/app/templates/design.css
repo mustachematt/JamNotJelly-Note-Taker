@@ -87,3 +87,8 @@ input[type=submit]:hover {
 textarea {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+#nav_logo {
+    height: 60px;
+    vertical-align: bottom;
+}
