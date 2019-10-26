@@ -41,10 +41,9 @@ def logout():
 def mynotes():
     form = NoteForm()
     if form.validate_on_submit():
-        note = Note(body=form.note.data, author=current_user)
+        note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
         db.session.add(note)
         db.session.commit()
-#        flash('Your note has been saved!')
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
     return render_template('mynotes.html', form=form, notes=notes)

@@ -43,14 +43,29 @@
             <!--generates a hidden field containing a token used to protect against CSRF attacks-->
             {{ form.hidden_tag() }}
 
+            <!--enter/validate input-->
+            <!--note input-->
             {{ form.note(cols=60, rows=20) }}<br>
             {% for error in form.note.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-            {{ form.submit() }}<br><br>
-            <ul class="textarea">
+            <!--due date input and submit-->
+            <p>Due Date: {{ form.due_date() }} {{ form.submit() }}
+            {% for error in form.due_date.errors %}
+                <span style="color: red;"><br>{{ error }}</span>
+            {% endfor %}</p><br>
+
+            <!-- displays notes in a list default sorted by createdatetime desc -->
+            <ul>
                 {% for note in notes %}
-                    <li><b>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}:</b><br> {{ note.body }}</li><br>
+                    <li>
+                        <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }} 
+                            <!--only display due date if one exists-->
+                            {% if note.due_date %}
+                                | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
+                            {% endif %}
+                        <br>{{ note.body }}
+                    </li><br>
                 {% endfor %}
             </ul>
         </form>

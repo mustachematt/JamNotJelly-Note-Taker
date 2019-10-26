@@ -35,6 +35,7 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    due_date = db.Column(db.DateTime, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
