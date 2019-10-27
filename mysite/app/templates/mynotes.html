@@ -3,8 +3,9 @@
 
 <head>
     <title>Jelly Lists, Digital List App</title>
-    <link type="text/css" rel="stylesheet" href="design.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/style.css"/>
     <link rel="icon" sizes="120x120" href="images/JamNotJelly_icon.png">
+
     <!--This imports the font, we can change this later-->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 </head>
@@ -13,25 +14,36 @@
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
-        <a href="homepage.html"><img src="images/JamNotJelly_Logo_text.png" alt="Jam Not Jelly's Jelly Lists" id="nav_logo"></a>
-    
+
+        <h2 id="title"><a href="homepage">Jam Not Jelly's Jelly Lists</a></h2>
+
         <ul class="nav_links">
             <!--Use this list for the main links in the nav bar-->
-            <li><a class="nav_content" href="mynotes.html">My Notes</a></li>
-            <li><a class="nav_content" href="account.html">Account</a></li>
+            <!--These links are only visible if the user is authenticated-->
+            {% if current_user.is_authenticated %}
+            <li><a class="nav_content" href="mynotes">My Notes</a></li>
+            <li><a class="nav_content" href="account">Account</a></li>
+            {% endif %}
         </ul>
-            
+
         <ul class="nav_links" id="right_links">
             <!--This list is for the login/register pages or anything that we want to align to the right-->
-            <li><a class="nav_content" href="login.html">Login</a></li> |
-            <li><a class="nav_content" href="register.html">Sign Up</a></li>
+            <!--If user is not authenticated, they see login link which redirects to login page-->
+            <!--If user is authenticated, they see logout link which redirects to homepage-->
+            {% if current_user.is_anonymous %}
+            <li><a href="{{ url_for('login') }}">Login</a></li> |
+            {% else %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> |
+            {% endif %}
+            <li><a class="nav_content" href="register">Sign Up</a></li>
         </ul>
     </header>
-    
+
     <div id="main_body">
+
         <p>What would you like to keep track of? Write it below:</p>
         <textarea name="notes" rows="20", cols="60"></textarea>
     </div>
-        
+
 </body>
 </html>
