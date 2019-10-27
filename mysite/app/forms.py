@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 from app.models import Note, User
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, DateField, PasswordField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional, ValidationError
+=======
+from app.models import User
+from flask_wtf import FlaskForm
+from wtforms import BooleanField, PasswordField, StringField, SubmitField
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+>>>>>>> master
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -25,6 +32,7 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
+<<<<<<< HEAD
             raise ValidationError('Please use a different email address.')
 
 class NoteForm(FlaskForm):
@@ -36,3 +44,6 @@ class NoteForm(FlaskForm):
         note = Note.query.filter_by(due_date=due_date.data).first()
         if note is not None:
             raise ValidationError('Enter date as mm/dd/yyyy')
+=======
+            raise ValidationError('Please use a different email address.')
+>>>>>>> master

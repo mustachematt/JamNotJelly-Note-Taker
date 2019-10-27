@@ -23,19 +23,31 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+<<<<<<< HEAD
     def get_notes(self):
         return Note.query.filter(Note.user_id == self.id).order_by(
             Note.timestamp.desc())
 
+=======
+>>>>>>> master
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
+<<<<<<< HEAD
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     due_date = db.Column(db.DateTime, index=True)
+=======
+# the table exists in the db but no data yet
+# the front-end (mynotes and/or account pgs) does not yet support this
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+>>>>>>> master
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):

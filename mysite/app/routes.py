@@ -1,8 +1,14 @@
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db
+<<<<<<< HEAD
 from app.forms import LoginForm, NoteForm, RegistrationForm
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import Note, User
+=======
+from app.forms import LoginForm, RegistrationForm
+from flask_login import current_user, login_required, login_user, logout_user
+from app.models import User
+>>>>>>> master
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -36,6 +42,7 @@ def logout():
     logout_user()
     return redirect(url_for('homepage'))
 
+<<<<<<< HEAD
 @app.route('/mynotes', methods=['GET', 'POST'])
 @login_required
 def mynotes():
@@ -47,6 +54,11 @@ def mynotes():
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
     return render_template('mynotes.html', form=form, notes=notes)
+=======
+@app.route('/mynotes')
+def mynotes():
+    return render_template('mynotes.html')
+>>>>>>> master
 
 @app.route('/register', methods=['GET','POST'])
 def register():
