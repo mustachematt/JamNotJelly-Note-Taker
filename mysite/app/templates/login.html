@@ -6,6 +6,7 @@
     <title>Login - Jam Transcriptions</title>
 
     <link type="text/css" rel="stylesheet" href="/static/style.css"/>
+    <link rel="icon" sizes="120x120" href="images/JamNotJelly_icon.png">
 
     <!--This imports the font, we can change this later-->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
@@ -14,9 +15,10 @@
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
-        <h2 id="title"><a href="homepage">Jam Not Jelly's Jelly Lists</a></h2>
 
-         <ul class="nav_links">
+        <a href="homepage.html"><img src="images/JamNotJelly_Logo_text.png" alt="Jam Not Jelly's Jelly Lists" id="nav_logo"></a>
+
+        <ul class="nav_links">
             <!--Use this list for the main links in the nav bar-->
             <!--These links are only visible if the user is authenticated-->
             {% if current_user.is_authenticated %}
