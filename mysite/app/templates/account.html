@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Account - Jam Transcriptions</title>
+    <link type="text/css" rel="stylesheet" href="/static/style.css"/>
+    <link rel="icon" sizes="120x120" href="images/JamNotJelly_icon.png">
+
+    <!--This imports the font, we can change this later-->
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!--This is the bar at the top of the site-->
+        <!--any main links should be placed within the nav-->
+        <a href="homepage"><img src="static/JamNotJelly_Logo_text.png" alt="Jam Not Jelly's Jelly Lists" id="nav_logo"></a>
+
+         <ul class="nav_links">
+            <!--Use this list for the main links in the nav bar-->
+            <!--These links are only visible if the user is authenticated-->
+            {% if current_user.is_authenticated %}
+            <li><a class="nav_content" href="mynotes">My Notes</a></li>
+            <li><a class="nav_content" href="account">Account</a></li>
+            {% endif %}
+        </ul>
+
+        <ul class="nav_links" id="right_links">
+            <!--This list is for the login/register pages or anything that we want to align to the right-->
+            <!--If user is not authenticated, they see login link which redirects to login page-->
+            <!--If user is authenticated, they see logout link which redirects to homepage-->
+            {% if current_user.is_anonymous %}
+            <li><a href="{{ url_for('login') }}">Login</a></li> |
+            {% else %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li> |
+            {% endif %}
+            <li><a class="nav_content" href="register">Sign Up</a></li>
+        </ul>
+    </header>
+
+    <div id="main_body">
+        <h1>Account Page</h1>
+    </div>
+
+</body>
+</html>
