@@ -30,11 +30,11 @@
             <!--If user is not authenticated, they see login link which redirects to login page-->
             <!--If user is authenticated, they see logout link which redirects to homepage-->
             {% if current_user.is_anonymous %}
-            <li><a href="{{ url_for('login') }}">Login</a></li> |
+            <li><a id=loginButton href="{{ url_for('login') }}">Login</a></li> |
             {% else %}
             <li><a href="{{ url_for('logout') }}">Logout</a></li> |
             {% endif %}
-            <li><a class="nav_content" href="register">Sign Up</a></li>
+            <li><a class="nav_content" id="signUpButton" href="register">Sign Up</a></li>
         </ul>
     </header>
 
