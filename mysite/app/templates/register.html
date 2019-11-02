@@ -61,7 +61,7 @@
             Confirm Password:<br>
                 {{ form.password2() }}
                  {% for error in form.password2.errors %}
-                <span style="color: red;"><br>{{ error }}</span>
+                <span name="confirmPass" style="color: red;"><br>{{ error }}</span>
             {% endfor %}<br><br>
             {{ form.submit() }}<br><br>
         </form>
