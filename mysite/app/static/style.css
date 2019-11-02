@@ -83,3 +83,12 @@ input[type=submit]:hover {
     background-color: rgba(239,118,116,0.7);
     color: rgba(0,0,0,0.7);
 }
+
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#nav_logo {
+    height: 60px;
+    vertical-align: bottom;
+}
