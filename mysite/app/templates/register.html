@@ -38,7 +38,7 @@
             <li><a href="register">Sign Up</a></li>
         </ul>
     </header>
-    <div class="login_box">
+    <div name=loginbox class="login_box">
         <h1>Sign Up</h1>
         <form action="" method="post">
             <!--generates a hidden field containing a token used to protect against CSRF attacks-->
@@ -46,12 +46,12 @@
             Username:<br>
                 {{ form.username() }}
                 {% for error in form.username.errors %}
-                    <span style="color: red;"><br>{{ error }}</span>
+                    <span name="nameError"style="color: red;"><br>{{ error }}</span>
                 {% endfor %}<br><br>
             Email:<br>
                 {{ form.email() }}
                 {% for error in form.email.errors %}
-                    <span style="color: red;"><br>{{ error }}</span>
+                    <span name="emailError" style="color: red;"><br>{{ error }}</span>
                 {% endfor %}<br><br>
             Password:<br>
                 {{ form.password() }}
