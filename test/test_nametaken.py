@@ -42,20 +42,14 @@ else:
     print("TEST PASSED!")
 sleep(5)
 
-print("nav to signup successful")
 
-
-
-emailError = driver.find_element_by_name("emailError")
-string1 = emailError.get_attribute('innerHTML')
-print(string1)
 #print(emailError)
 sleep(5)
 #ActionChains(driver).move_to_element(loginButton).click().perform()
 #usernameField = driver.find_element_by_id("username")
 #ActionChains(driver).move_to_element(usernameField).click().perform()
-if(string1.find("Invalid email address.")) == -1:
-    print("test failed.")
+#if(string1.find("Invalid email address.")) == -1:
+    #print("test failed.")
 #usernameField.send_keys("shannon")
 
 
