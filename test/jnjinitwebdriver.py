@@ -21,7 +21,7 @@ assert "Jelly Lists" in driver.title
 loginButton = driver.find_element_by_id("loginButton")
 
 ActionChains(driver).move_to_element(loginButton).click().perform()
-
+sleep(2)
 usernameField = driver.find_element_by_id("username")
 ActionChains(driver).move_to_element(usernameField).click().perform()
 
@@ -29,7 +29,7 @@ usernameField.send_keys("shannon")
 
 passwordField = driver.find_element_by_id("password")
 ActionChains(driver).move_to_element(passwordField).click().perform()
-
+sleep(2)
 passwordField.send_keys("420")
 passwordField.send_keys(Keys.RETURN)
 
