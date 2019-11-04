@@ -1,10 +1,20 @@
 Feature: login correctly
+    
+    Background: Navigate to Login page
+        Given I am on "http://localhost:5000/login"
+    
+    Scenario: Verify error for empty username field
+        Given "username" field is empty
+        When I click on the "Sign In" button
+        Then I see a "This field is required" "nameError"
 
-    Scenario: Verify we can get to the login page
-        Given I am on "http://localhost:5000/"
-        And I see "Jelly Lists, Digital List App" in the title
-        When I click the "loginButton"
-        Then I should be on the "Login" page
-        And I should see the "apple"
+    Scenario: Verify error for empty password field
+        Given "password" field is empty
+        When I click on the "Sign In" button
+        Then I see a "This field is required" "passwordError" 
+
+
+        
+        
 
 

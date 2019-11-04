@@ -44,3 +44,4 @@ class NoteDeleteForm(FlaskForm):
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
     submit = SubmitField('Delete All Notes')
 
+
