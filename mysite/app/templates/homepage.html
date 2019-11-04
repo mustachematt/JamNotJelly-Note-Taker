@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="home_body">
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
@@ -40,8 +40,32 @@
     </header>
 
     <div id="main_body">
-        <h1>Fill with info about this product</h1>
-    </div>
 
+        <div id="sales_pitch">
+            <h1>Stay on top of things with Jelly Lists</h1>
+            <p>Jelly Lists is a free to-do List app that can:</p>
+            <ul>
+                <li><p>Manage your tasks</p></li>
+                <li><p>Integrate with Google Calendar</p></li>
+                <li><p>Remind you of important due dates</p></li>
+                <li><p>Reward you for getting your tasks done</p></li>
+            </ul>
+        </div>
+
+        <div id="home_reg">
+            <h1 id="reg_header">Sign up for free now</h1>
+            <form action="" method="post">
+                <p class="reg_p">Username</p>
+                <input class="reg_text" type="text" name="username">
+                <p class="reg_p">Email</p>
+                <input class="reg_text" type="email" name="email">
+                <p class="reg_p">Password</p>
+                <input class="reg_text" type="password" name="password">
+                <p class="reg_p">Confirm Password</p>
+                <input class="reg_text" type="password" name="confirm_password">
+                <input class="reg_button" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
