@@ -45,7 +45,7 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <span style="color: red;">{{ message }}</span>
+                <span  style="color: red;">{{ message }}</span>
             {% endfor %}
         {% endif %}
         {% endwith %}
@@ -55,12 +55,12 @@
             Username:<br>
                 {{ form.username() }}
                 {% for error in form.username.errors %}
-                    <span style="color: red;"><br>{{ error }}</span>
+                    <span name="usernameError" style="color: red;"><br>{{ error }}</span>
                 {% endfor %}<br><br>
             Password:<br>
             {{ form.password() }}
             {% for error in form.password.errors %}
-                <span style="color: red;"><br>{{ error }}</span>
+                <span name="passwordError" style="color: red;"><br>{{ error }}</span>
             {% endfor %}<br>
             {{ form.remember_me() }} {{ form.remember_me.label }}<br><br>
             {{ form.submit() }}<br><br>
