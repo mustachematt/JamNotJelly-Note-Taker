@@ -40,11 +40,14 @@ class NoteForm(FlaskForm):
             raise ValidationError('Enter date as mm/dd/yyyy')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class NoteDeleteForm(FlaskForm):
     note = TextAreaField(validators=[DataRequired()])
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
     submit = SubmitField('Delete All Notes')
 
 
+=======
+>>>>>>> parent of f048c52... Made the user able to clear their list of notes, but we still need to add the ability to delete individual ones.
 =======
 >>>>>>> parent of f048c52... Made the user able to clear their list of notes, but we still need to add the ability to delete individual ones.
