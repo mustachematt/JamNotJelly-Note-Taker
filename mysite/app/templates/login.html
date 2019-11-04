@@ -55,7 +55,7 @@
             Username:<br>
                 {{ form.username() }}
                 {% for error in form.username.errors %}
-                    <span style="color: red;"><br>{{ error }}</span>
+                    <span name="usernameError"style="color: red;"><br>{{ error }}</span>
                 {% endfor %}<br><br>
             Password:<br>
             {{ form.password() }}
