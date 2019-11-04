@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Jelly Lists, Digital List App</title>
+    <title>My Notes - Jam Transcriptions</title>
     <link type="text/css" rel="stylesheet" href="/static/style.css"/>
     <link rel="icon" sizes="120x120" href="images/JamNotJelly_icon.png">
 
@@ -10,19 +10,19 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 </head>
 
-<body class="home_body">
+<body>
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
         <a href="homepage"><img src="static/JamNotJelly_Logo_text.png" alt="Jam Not Jelly's Jelly Lists" id="nav_logo"></a>
 
-         <ul class="nav_links">
+        <ul class="nav_links">
             <!--Use this list for the main links in the nav bar-->
             <!--These links are only visible if the user is authenticated-->
             {% if current_user.is_authenticated %}
             <li><a class="nav_content" href="mynotes">My Notes</a></li>
             <li><a class="nav_content" href="account">Account</a></li>
-             <li><a class="nav_content" href="delete-notes">Delete Notes</a></li>
+            <li><a class="nav_content" href="delete-notes">Delete Notes</a></li>
             {% endif %}
         </ul>
 
@@ -31,41 +31,35 @@
             <!--If user is not authenticated, they see login link which redirects to login page-->
             <!--If user is authenticated, they see logout link which redirects to homepage-->
             {% if current_user.is_anonymous %}
-            <li><a id=loginButton href="{{ url_for('login') }}">Login</a></li> |
+            <li><a href="{{ url_for('login') }}">Login</a></li> |
             {% else %}
             <li><a href="{{ url_for('logout') }}">Logout</a></li> |
             {% endif %}
-            <li><a class="nav_content" id="signUpButton" href="register">Sign Up</a></li>
+            <li><a class="nav_content" href="register">Sign Up</a></li>
         </ul>
     </header>
 
     <div id="main_body">
+        <form action="" method="post">
+            <!--generates a hidden field containing a token used to protect against CSRF attacks-->
+            {{ form.hidden_tag() }}
+            <br>{{ form.submit() }}<br><br>
 
-        <div id="sales_pitch">
-            <h1>Stay on top of things with Jelly Lists</h1>
-            <p>Jelly Lists is a free to-do List app that can:</p>
+            <!-- displays notes in a list default sorted by createdatetime desc -->
             <ul>
-                <li><p>Manage your tasks</p></li>
-                <li><p>Integrate with Google Calendar</p></li>
-                <li><p>Remind you of important due dates</p></li>
-                <li><p>Reward you for getting your tasks done</p></li>
+                {% for note in notes %}
+                    <li>
+                        <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
+                            <!--only display due date if one exists-->
+                            {% if note.due_date %}
+                                | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
+                            {% endif %}
+                        <br>{{ note.body }}
+                    </li><br>
+                {% endfor %}
             </ul>
-        </div>
-
-        <div id="home_reg">
-            <h1 id="reg_header">Sign up for free now</h1>
-            <form action="" method="post">
-                <p class="reg_p">Username</p>
-                <input class="reg_text" type="text" name="username">
-                <p class="reg_p">Email</p>
-                <input class="reg_text" type="email" name="email">
-                <p class="reg_p">Password</p>
-                <input class="reg_text" type="password" name="password">
-                <p class="reg_p">Confirm Password</p>
-                <input class="reg_text" type="password" name="confirm_password">
-                <input class="reg_button" type="submit" value="Submit">
-            </form>
-        </div>
+        </form>
     </div>
+
 </body>
 </html>
