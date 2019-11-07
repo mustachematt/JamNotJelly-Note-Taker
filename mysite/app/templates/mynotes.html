@@ -11,8 +11,6 @@
 </head>
 
 <body>
-	{% import datetime
-	import pytz %}
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
@@ -49,10 +47,12 @@
         <form action="" method="post">
             <!--generates a hidden field containing a token used to protect against CSRF attacks-->
             {{ form.hidden_tag() }}
-
             <!--enter/validate input-->
             <!--note input-->
-            {{ form.note(cols=60, rows=20) }}<br>
+            {% if !GET['noteID'] %} {{ form.note(cols=60, rows=20) }}
+			{% else %} {{form.note(cols=60, rows=20) = <!--GET note.text WHERE note.id == noteID-->}}
+			{% endif %}
+			<br>
             {% for error in form.note.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
@@ -66,12 +66,7 @@
             <ul>
                 {% for note in notes %}
                     <li>
-                        <i>Added: </i>{% universalTime = note.timestamp
-										#timezone can be changed
-										timezone = pytz.timezone("US/Eastern")
-										localizedTime = pytz.utc.localize(universalTime)
-										timeToDisplay = localizedTime.astimezone(timezone)%}
-										{{ timeToDisplay.strftime('%m/%d/%Y - %I:%M %p') }}
+                        <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
                             <!--only display due date if one exists-->
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
