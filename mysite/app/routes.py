@@ -6,10 +6,21 @@ from app.models import Note, User
 from werkzeug.urls import url_parse
 
 
-@app.route('/')
-@app.route('/homepage')
+@app.route('/', methods=['GET','POST'])
+@app.route('/homepage', methods=['GET','POST'])
 def homepage():
-    return render_template('homepage.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('mynotes')
+        return redirect(url_for('mynotes'))
+    return render_template('homepage.html', form=form)
 
 
 @app.route('/account')
@@ -65,7 +76,7 @@ def delete_note():
             note = Note.query.filter_by(user_id=current_user.id)
             for n in note:
                 db.session.delete(n)
-        db.session.commit()
+                db.session.commit()
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
     return render_template('delete-notes.html', form=form, notes=notes)
@@ -81,8 +92,11 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('You are a registered user! Login now!')
-        return redirect(url_for('login'))
+        login_user(user)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('mynotes')
+        return redirect(url_for('mynotes'))
     return render_template('register.html', form=form)
 
 

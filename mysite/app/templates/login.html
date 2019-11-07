@@ -32,10 +32,10 @@
             <!--If user is authenticated, they see logout link which redirects to homepage-->
             {% if current_user.is_anonymous %}
             <li><a href="{{ url_for('login') }}">Login</a></li> |
-            {% else %}
-            <li><a href="{{ url_for('logout') }}">Logout</a></li> |
-            {% endif %}
             <li><a href="register">Sign Up</a></li>
+            {% else %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
         </ul>
     </header>
     <div class="login_box">
@@ -55,11 +55,7 @@
             Username:<br>
                 {{ form.username() }}
                 {% for error in form.username.errors %}
-<<<<<<< HEAD
-                    <span name="usernameError"style="color: red;"><br>{{ error }}</span>
-=======
                     <span name="usernameError" style="color: red;"><br>{{ error }}</span>
->>>>>>> b4c0ddb0fa170bbfe47c244a9dfa12413ad1f09c
                 {% endfor %}<br><br>
             Password:<br>
             {{ form.password() }}

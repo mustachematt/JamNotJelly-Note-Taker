@@ -32,10 +32,10 @@
             <!--If user is authenticated, they see logout link which redirects to homepage-->
             {% if current_user.is_anonymous %}
             <li><a id=loginButton href="{{ url_for('login') }}">Login</a></li> |
-            {% else %}
-            <li><a href="{{ url_for('logout') }}">Logout</a></li> |
-            {% endif %}
             <li><a class="nav_content" id="signUpButton" href="register">Sign Up</a></li>
+            {% else %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
         </ul>
     </header>
 
@@ -55,15 +55,34 @@
         <div id="home_reg">
             <h1 id="reg_header">Sign up for free now</h1>
             <form action="" method="post">
+                <!--generates a hidden field containing a token used to protect against CSRF attacks-->
+                {{ form.hidden_tag() }}
+
                 <p class="reg_p">Username</p>
-                <input class="reg_text" type="text" name="username">
+                {{ form.username(class_="reg_text") }} 
+                {% for error in form.username.errors %}
+                    <span name="nameError"style="color: red;"><br>{{ error }}</span>
+                {% endfor %}
+
                 <p class="reg_p">Email</p>
-                <input class="reg_text" type="email" name="email">
+                {{ form.email(class_="reg_text") }}
+                {% for error in form.email.errors %}
+                    <span name="emailError" style="color: red;"><br>{{ error }}</span>
+                {% endfor %}
+
                 <p class="reg_p">Password</p>
-                <input class="reg_text" type="password" name="password">
+                {{ form.password(class_="reg_text") }}
+                {% for error in form.password.errors %}
+                    <span style="color: red;"><br>{{ error }}</span>
+                {% endfor %}
+
                 <p class="reg_p">Confirm Password</p>
-                <input class="reg_text" type="password" name="confirm_password">
-                <input class="reg_button" type="submit" value="Submit">
+                {{ form.password2(class_="reg_text") }}
+                {% for error in form.password2.errors %}
+                   <span name="confirmPass" style="color: red;"><br>{{ error }}</span>
+                {% endfor %}
+
+                {{ form.submit(class_="reg_button") }}
             </form>
         </div>
     </div>
