@@ -64,7 +64,12 @@
             <ul>
                 {% for note in notes %}
                     <li>
-                        <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
+                        <i>Added: </i>{% universalTime = note.timestamp
+										#timezone can be changed
+										timezone = pytz.timezone("US/Eastern")
+										localizedTime = pytz.utc.localize(universalTime)
+										timeToDisplay = localizedTime.astimezone(timezone)%}
+										{{ timeToDisplay.strftime('%m/%d/%Y - %I:%M %p') }}
                             <!--only display due date if one exists-->
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}

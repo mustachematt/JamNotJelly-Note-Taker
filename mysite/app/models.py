@@ -34,13 +34,8 @@ def load_user(id):
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    universalTime = datetime.datetime.utcnow()
-    #timezone can be changed
-    timezone = pytz.timezone("US/Eastern")
-    localizedTime = pytz.utc.localize(universalTime)
-    timeToDisplay = localizedTime.astimezone(timezone)
     body = db.Column(db.String)
-    timestamp = db.Column(db.DateTime, index=True, default=timeToDisplay)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.now)
     due_date = db.Column(db.DateTime, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
