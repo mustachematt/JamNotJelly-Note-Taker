@@ -49,8 +49,8 @@
             {{ form.hidden_tag() }}
             <!--enter/validate input-->
             <!--note input-->
-            <!--{% if !GET['noteID'] %} --> {{ form.note(cols=60, rows=20) }}
-			<!--{% else %} {{form.note(cols=60, rows=20) = <!--GET note.text WHERE note.id == noteID-->
+            {{ form.note(cols=60, rows=20) }}
+			
 			<br>
             {% for error in form.note.errors %}
                 <span style="color: red;">[{{ error }}]</span>
