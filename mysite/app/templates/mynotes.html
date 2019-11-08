@@ -71,7 +71,7 @@
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
                             {% endif %}
                         <br>{{ note.body }}
-                    </li><a href="mynotes.html?noteID=".{{note.id}}.>Edit</a><br>
+                    </li><a href="mynotes.html?noteID={{note.id}}">Edit</a><br>
                 {% endfor %}
             </ul>
         </form>
