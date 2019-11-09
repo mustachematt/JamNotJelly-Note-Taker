@@ -60,7 +60,6 @@
             {{ form.hidden_tag() }}
             <!--enter/validate input-->
             <!--note input-->
-			{% noteVar = request.GET.get('variable_name') %}
             {{ form.note(cols=60, rows=20) = TextAreaField(noteVar,validators=[DataRequired()]) }}
 			<br>
             {% for error in form.note.errors %}

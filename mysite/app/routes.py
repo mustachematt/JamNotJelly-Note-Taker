@@ -67,6 +67,7 @@ def account():
 @login_required
 def mynotes():
     form = NoteForm()
+    noteVar = request.GET.get('noteID')
     if form.validate_on_submit():
         if 'submit' in request.form:
             note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
