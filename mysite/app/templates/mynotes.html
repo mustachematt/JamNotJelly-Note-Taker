@@ -60,13 +60,14 @@
             {{ form.hidden_tag() }}
             <!--enter/validate input-->
             <!--note input-->
-            {{ form.note(cols=60, rows=20) }}
-			
+			{% noteVar = request.GET.get('variable_name') %}
+            {{ form.note(cols=60, rows=20) = TextAreaField(noteVar,validators=[DataRequired()]) }}
 			<br>
             {% for error in form.note.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
             <!--due date input and submit-->
+			<!--if the variable isn't null, update note where note.id = variable-->
             <p>Due Date: {{ form.due_date() }} {{ form.submit() }}
             {% for error in form.due_date.errors %}
                 <span style="color: red;"><br>{{ error }}</span>
