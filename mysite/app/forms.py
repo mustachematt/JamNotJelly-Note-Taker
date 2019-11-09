@@ -1,7 +1,6 @@
 
 from app.models import Note, User
 from flask_wtf import FlaskForm
-from flask import request
 from wtforms import BooleanField, DateField, PasswordField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional, ValidationError
 
@@ -31,7 +30,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email address is already in use. Please use a different email address.')
 
 class NoteForm(FlaskForm):
-    note = TextAreaField(request.args.get('noteID'), validators=[DataRequired()])
+    note = TextAreaField(validators=[DataRequired()])
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
     submit = SubmitField('Save')
 

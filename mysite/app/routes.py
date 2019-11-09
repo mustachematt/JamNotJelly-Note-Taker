@@ -65,16 +65,30 @@ def account():
 @login_required
 def mynotes():
     form = NoteForm()
-    if form.validate_on_submit():
+    noteID = request.args.get('noteID')
+    #if creating a new note
+    if form.validate_on_submit() and noteID is None:
         if 'submit' in request.form:
             note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
             db.session.add(note)
             db.session.commit()
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
+    #update existing note
+    noteData = Note.query.filter_by(id=noteID).first()
+    if form.validate_on_submit() and noteID is not None:
+        if 'submit' in request.form:
+            noteData.body = form.note.data
+            noteData.due_date = form.due_date.data
+            noteData.author = current_user
+            db.session.commit()
+        return redirect(url_for('mynotes'))
+    #if editing a note, do the following. Will not run if submitting a new note
+    if noteID is not None:
+        form.note.data = noteData.body
+        form.due_date.data = noteData.due_date
+    #display note to edit
     return render_template('mynotes.html', form=form, notes=notes)
-
-
 
 @app.route('/delete-notes', methods=['GET', 'POST'])
 @login_required
