@@ -4,7 +4,6 @@ from app.forms import AccountForm, LoginForm, NoteForm, RegistrationForm, NoteDe
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import Note, User
 from werkzeug.urls import url_parse
-import requests
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/homepage', methods=['GET','POST'])
@@ -67,7 +66,7 @@ def account():
 @login_required
 def mynotes():
     form = NoteForm()
-    noteVar = request.GET.get('noteID')
+    noteVar = request.args.get('noteID')
     if form.validate_on_submit():
         if 'submit' in request.form:
             note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
