@@ -4,7 +4,7 @@ from app.forms import AccountForm, LoginForm, NoteForm, RegistrationForm, NoteDe
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import Note, User
 from werkzeug.urls import url_parse
-
+import requests
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/homepage', methods=['GET','POST'])
