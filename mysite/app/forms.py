@@ -1,7 +1,8 @@
 
 from app.models import Note, User
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, DateField, PasswordField, StringField, SubmitField, TextAreaField
+from wtforms import BooleanField, DateField, PasswordField, StringField
+from wtforms import SubmitField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional, ValidationError
 
 
@@ -42,7 +43,9 @@ class NoteForm(FlaskForm):
 class NoteDeleteForm(FlaskForm):
     note = TextAreaField(validators=[DataRequired()])
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
-    submit = SubmitField('Delete All Notes')
+    submit = SubmitField('Delete All Notes', id='deleteAll')
+    hiddenID = HiddenField('note')
+    submitSingle = SubmitField()
 
 class AccountForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

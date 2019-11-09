@@ -96,11 +96,17 @@ def delete_note():
     form = NoteDeleteForm()
     if form.is_submitted():
         if 'submit' in request.form:
-            print('if chosen')
             note = Note.query.filter_by(user_id=current_user.id)
             for n in note:
                 db.session.delete(n)
                 db.session.commit()
+        if 'submitSingle' in request.form:
+            singleID = int(request.form['submitSingle'])
+            note = Note.query.filter_by(id=singleID).first()
+            db.session.delete(note)
+            db.session.commit()
+            if Note.query.filter_by(user_id=current_user.id).first() is not None:   
+                return redirect(url_for('delete_note'))
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
     return render_template('delete-notes.html', form=form, notes=notes)
