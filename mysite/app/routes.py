@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db
-from app.forms import LoginForm, NoteForm, RegistrationForm, NoteDeleteForm
+from app.forms import AccountForm, LoginForm, NoteForm, RegistrationForm, NoteDeleteForm
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import Note, User
 from werkzeug.urls import url_parse
@@ -21,11 +21,6 @@ def homepage():
             next_page = url_for('mynotes')
         return redirect(url_for('mynotes'))
     return render_template('homepage.html', form=form)
-
-
-@app.route('/account')
-def account():
-    return render_template('account.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -52,6 +47,22 @@ def logout():
     return redirect(url_for('homepage'))
 
 
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = AccountForm(current_user.username)
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    notes = current_user.get_notes().all()
+    return render_template('account.html', form=form)
+
+
 @app.route('/mynotes', methods=['GET', 'POST'])
 @login_required
 def mynotes():
@@ -60,7 +71,7 @@ def mynotes():
         if 'submit' in request.form:
             note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
             db.session.add(note)
-        db.session.commit()
+            db.session.commit()
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
     return render_template('mynotes.html', form=form, notes=notes)

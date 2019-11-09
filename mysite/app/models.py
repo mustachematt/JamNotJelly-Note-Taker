@@ -2,6 +2,7 @@ from app import db, login
 import pytz
 from datetime import datetime
 from flask_login import UserMixin
+from hashlib import md5
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # these are the classes (database models)
@@ -13,6 +14,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    about_me = db.Column(db.String(140))
     notes = db.relationship('Note', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -27,6 +29,14 @@ class User(UserMixin, db.Model):
     def get_notes(self):
         return Note.query.filter(Note.user_id == self.id).order_by(
             Note.timestamp.desc())
+    
+    def get_note_count(self):
+        return Note.query.filter(Note.user_id == self.id).count()
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=monsterid&s={}'.format(
+            digest, size)
 
 @login.user_loader
 def load_user(id):
