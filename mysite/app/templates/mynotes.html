@@ -60,8 +60,9 @@
             {{ form.hidden_tag() }}
             <!--enter/validate input-->
             <!--note input-->
-			{% noteVar = request.args.get('noteID') %}
-            {% form.note(cols=60, rows=20) = noteVar %}
+			<!--{% noteVar = request.args.get('noteID') %}-->
+            {% form.note = "stuff" %}
+			{{ form.note(cols=60, rows=20) }}
 			
 			<br>
             {% for error in form.note.errors %}
