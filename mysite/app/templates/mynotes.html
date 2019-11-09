@@ -60,7 +60,7 @@
             {{ form.hidden_tag() }}
             <!--enter/validate input-->
             <!--note input-->
-			{{ form.note(request.args.get('noteID')) }}
+			{{ form.note(cols=60, rows=20) }}
 			<br>
             {% for error in form.note.errors %}
                 <span style="color: red;">[{{ error }}]</span>
