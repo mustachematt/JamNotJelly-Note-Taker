@@ -20,9 +20,11 @@
             <!--Use this list for the main links in the nav bar-->
             <!--These links are only visible if the user is authenticated-->
             {% if current_user.is_authenticated %}
-            <li><a class="nav_content" href="mynotes">My Notes</a></li>
-            <li><a class="nav_content" href="account">Account</a></li>
-             <li><a class="nav_content" href="delete-notes">Delete Notes</a></li>
+                <li><a class="nav_content" href="mynotes">My Notes</a></li>
+                <li><a class="nav_content" href="account">Account</a></li>
+                {% if current_user.get_note_count() > 0 %}
+                    <li><a class="nav_content" href="delete-notes">Delete Notes</a></li>
+                {% endif %}
             {% endif %}
         </ul>
 
