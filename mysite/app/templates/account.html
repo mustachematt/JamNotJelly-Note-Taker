@@ -20,9 +20,11 @@
             <!--Use this list for the main links in the nav bar-->
             <!--These links are only visible if the user is authenticated-->
             {% if current_user.is_authenticated %}
-            <li><a class="nav_content" href="mynotes">My Notes</a></li>
-            <li><a class="nav_content" href="account">Account</a></li>
-             <li><a class="nav_content" href="delete-notes">Delete Notes</a></li>
+                <li><a class="nav_content" href="mynotes">My Notes</a></li>
+                <li><a class="nav_content" href="account">Account</a></li>
+                {% if current_user.get_note_count() > 0 %}
+                    <li><a class="nav_content" href="delete-notes">Delete Notes</a></li>
+                {% endif %}
             {% endif %}
         </ul>
 
@@ -40,8 +42,36 @@
         </ul>
     </header>
 
-    <div id="main_body">
-        <h1>Account Page</h1>
+    <div>
+        <table>
+            <tr valign="top">
+                <td><img src="{{ current_user.avatar(128) }}"></td>
+                <td>
+                    <h1>{{ current_user.username }}</h1>
+                    {% if current_user.about_me %}<p>{{ current_user.about_me }}</p>{% endif %}
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <h2>Edit Profile</h2>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                Username:<br>
+                {{ form.username(size=36) }}<br>
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                About Me:<br>
+                {{ form.about_me(cols=50, rows=4) }}<br>
+                {% for error in form.about_me.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
     </div>
 
 </body>
