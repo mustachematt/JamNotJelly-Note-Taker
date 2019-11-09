@@ -30,7 +30,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email address is already in use. Please use a different email address.')
 
 class NoteForm(FlaskForm):
-    note = TextAreaField('stuff', validators=[DataRequired()])
+    note = TextAreaField(validators=[DataRequired()])
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
     submit = SubmitField('Save')
 

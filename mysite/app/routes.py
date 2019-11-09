@@ -61,7 +61,6 @@ def account():
     notes = current_user.get_notes().all()
     return render_template('account.html', form=form)
 
-
 @app.route('/mynotes', methods=['GET', 'POST'])
 @login_required
 def mynotes():
@@ -74,6 +73,7 @@ def mynotes():
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
     return render_template('mynotes.html', form=form, notes=notes)
+
 
 
 @app.route('/delete-notes', methods=['GET', 'POST'])
