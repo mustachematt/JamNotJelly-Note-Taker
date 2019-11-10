@@ -65,7 +65,7 @@
 
                     <!--enter/validate input-->
                     <!--note input-->
-                    {{ form.note(cols=60, rows=20, id="note_textbox") }}<br>
+                    {{ form.note(style="width: 80%;",rows=10, id="note_textbox") }}<br>
                     {% for error in form.note.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
@@ -87,8 +87,9 @@
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
                             {% endif %}
+							<a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
                         <br>{{ note.body }}
-                    </li><br>
+				</li><br>
                 {% endfor %}
             </ul>
         </form>
