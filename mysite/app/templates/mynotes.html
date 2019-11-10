@@ -8,9 +8,10 @@
 
     <!--This imports the font, we can change this later-->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    
 </head>
 
-<body>
+<body id="note_body">
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
@@ -41,38 +42,44 @@
         </ul>
     </header>
 
-    <div id>
+    <div id="note_body">
         {% if current_user.is_authenticated %}
         <table>
                 <tr valign="top">
-                    <td><img src="{{ current_user.avatar(128) }}"></td>
+                    <td><img src="{{ current_user.avatar(128) }}" id="note_avatar"></td>
                     <td>
                         <h1>{{ current_user.username }}</h1>
                         {% if current_user.about_me %}<p>{{ current_user.about_me }}</p>{% endif %}
                     </td>
                 </tr>
         </table>
-        <hr>
-        {% endif %}
-        <p>What would you like to keep track of? Write it below:</p>
-        <form action="" method="post">
-            <!--generates a hidden field containing a token used to protect against CSRF attacks-->
-            {{ form.hidden_tag() }}
 
-            <!--enter/validate input-->
-            <!--note input-->
-            {{ form.note(cols=60, rows=20) }}<br>
-            {% for error in form.note.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-            <!--due date input and submit-->
-            <p>Due Date: {{ form.due_date() }} {{ form.submit() }}
-            {% for error in form.due_date.errors %}
-                <span style="color: red;"><br>{{ error }}</span>
-            {% endfor %}</p><br>
+        {% endif %}
+        
+        <form action="" method="post" id="notes">
+            <div id="left_side">
+                <div id="note_input">
+                    <p>What would you like to keep track of? Write it below:</p>
+                    <!--generates a hidden field containing a token used to protect against CSRF attacks-->
+                    {{ form.hidden_tag() }}
+
+                    <!--enter/validate input-->
+                    <!--note input-->
+                    {{ form.note(cols=60, rows=20, id="note_textbox") }}<br>
+                    {% for error in form.note.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                    <!--due date input and submit-->
+                    <p>Due Date: {{ form.due_date(placeholder="dd/mm/yyyy") }} {{ form.submit(id="note_submit") }}
+                    {% for error in form.due_date.errors %}
+                        <span style="color: red;"><br>{{ error }}</span>
+                    {% endfor %}</p>
+                </div>
+            </div>
+            
 
             <!-- displays notes in a list default sorted by createdatetime desc -->
-            <ul>
+            <ul id="note_list">
                 {% for note in notes %}
                     <li>
                         <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
@@ -88,4 +95,4 @@
     </div>
 
 </body>
-</html>
+</html> 
