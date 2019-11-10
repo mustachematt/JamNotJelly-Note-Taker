@@ -157,5 +157,58 @@ textarea {
  }
 
 #sales_pitch ul {
-    padding-left: 50px
+    padding-left: 50px;
 }
+
+#note_avatar {
+    width: 50px;
+}
+
+#note_body {
+    height: 100%;
+}
+
+#notes {
+    position: relative;
+    height: 100%;
+}
+
+#left_side {
+    background-color: rgba(239,118,116,1);
+    width: 35%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    z-index: -3;
+}
+
+#note_input {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 200px;
+}
+
+#note_list {
+    width: 65%;
+    float: right;
+    word-wrap: break-word;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+#note_body {
+    border-bottom: solid grey 1px;
+    background-color: white;
+}
+
+#note_submit{
+    background-color: rgba(255, 0, 84, 1) !important;
+}
+
+#note_submit:hover{
+    background-color: rgba(255, 0, 84, 0.4) !important;
+} 
