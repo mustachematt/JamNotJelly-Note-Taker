@@ -44,18 +44,28 @@
     <div id="main_body">
 
         <div id="sales_pitch">
-            <h1>Stay on top of things with Jelly Lists</h1>
-            <p>Jelly Lists is a free to-do List app that can:</p>
+            <h1>Stay on top of things with <b>Jelly Lists</b></h1>
+            <br>
+            <p>With Jelly Lists, you can:</p>
             <ul>
-                <li><p>Manage your tasks</p></li>
-                <li><p>Integrate with Google Calendar</p></li>
+                <li><p>Create, edit, and delete tasks</p></li>
+                <li><p>Set priority levels for each task</p></li>
+                <li><p>Assign due dates for each task</p></li>
+                <li><p>Track when tasks were added</p></li>
                 <li><p>Remind you of important due dates</p></li>
-                <li><p>Reward you for getting your tasks done</p></li>
+            </ul>
+            <br>
+            <p>Features coming soon:</p>
+            <ul>
+                <li><p>Integration with Google Calendar</p></li>
+                <li><p>Email Reminders for tasks</p></li>
+                <li><p>Rewards for getting your tasks done on time</p></li>
             </ul>
         </div>
 
+        {% if current_user.is_anonymous %}
         <div id="home_reg">
-            <h1 id="reg_header">Sign up for free now</h1>
+            <h1 id="reg_header">Sign up for a free account</h1>
             <form action="" method="post">
                 <!--generates a hidden field containing a token used to protect against CSRF attacks-->
                 {{ form.hidden_tag() }}
@@ -87,6 +97,18 @@
                 {{ form.submit(class_="reg_button") }}
             </form>
         </div>
+
+        {% else %}
+        <div id="home_reg">
+            <h1 id="reg_header">Upgrade your account to get:</h1>
+            <p class="reg_p"> - Google Calendar integration</p>
+            <p class="reg_p"> - Email reminders for tasks</p>
+            <p class="reg_p"> - Rewards for tasks completed on time</p>
+            <br>
+            <p class="reg_p"><b>Visit the Account page to upgrade your account</b></p>
+            <br>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
