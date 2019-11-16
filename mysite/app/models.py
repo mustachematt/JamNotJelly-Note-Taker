@@ -48,6 +48,7 @@ class Note(db.Model):
     due_date = db.Column(db.DateTime, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     priority = db.Column(db.Integer, default=0)
+    title= db.Column(db.String)
 
     def __repr__(self):
         return '<Note {}>'.format(self.body)

@@ -31,7 +31,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email address is already in use. Please use a different email address.')
 
 class NoteForm(FlaskForm):
-    note = TextAreaField(validators=[DataRequired()])
+    note = TextAreaField(validators=[DataRequired()]) #body
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
     priorityLevel = SelectField('Priority', choices=[(0,'None'),(1,'Low'),(2,'Medium'),(3,'High')], coerce=int)
     submit = SubmitField('Save')
@@ -39,9 +39,10 @@ class NoteForm(FlaskForm):
         note = Note.query.filter_by(due_date=due_date.data).first()
         if note is not None:
             raise ValidationError('Enter date as mm/dd/yyyy')
+    title = StringField(validators=[Optional()])
 
 class NoteDeleteForm(FlaskForm):
-    note = TextAreaField(validators=[DataRequired()])
+    note = TextAreaField(validators=[DataRequired()]) 
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
     submit = SubmitField('Delete All Notes', id='deleteAll')
     hiddenID = HiddenField('note')

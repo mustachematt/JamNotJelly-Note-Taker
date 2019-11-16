@@ -58,12 +58,17 @@
         <form action="" method="post" id="notes">
             <div id="left_side">
                 <div id="note_input">
-                    <p>What would you like to keep track of? Write it below:</p>
+                    <p>What would you like to keep track of? Write it below:</p><br>
                     <!--generates a hidden field containing a token used to protect against CSRF attacks-->
                     {{ form.hidden_tag() }}
 
                     <!--enter/validate input-->
-                    <!--note input-->
+                    
+                    <!--note title input-->
+                    <p>Title:{{form.title(style= "width:50%;", id="title_textbox")}}</p>
+                  
+                    <!--note body input-->
+                   
                     {{ form.note(style="width: 80%;",rows=10, id="note_textbox") }}<br>
                     {% for error in form.note.errors %}
                         <span style="color: red;">[{{ error }}]</span>
@@ -90,14 +95,17 @@
 						{% elif note.priority == 1 %}  <span class="dot1"><span class="tooltiptext">Low Priority</span></span>   
 						{% elif note.priority == 2 %} <span class="dot2"><span class="tooltiptext">Medium Priority</span></span>   
 						{% elif note.priority == 3 %} <span class="dot3"><span class="tooltiptext">High Priority</span></span>   
-						{% endif %}
+                        {% endif %}
+                        
                         <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
                             <!--only display due date if one exists-->
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
                             {% endif %}
-							<a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
-                        <br>{{ note.body }}<br>
+                            <a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
+                        <br>
+                        <span style="font-weight: bold;">{{note.title}}</span> <br>
+                        {{ note.body }}<br>
 				</li><br>
                 {% endfor %}
             </ul>
