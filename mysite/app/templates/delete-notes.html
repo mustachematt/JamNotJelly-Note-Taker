@@ -40,7 +40,7 @@
     </header>
 
     <div id="main_body">
-        <form action="" method="post">
+        <form action="" method="post" style="height: 100%;">
             <!--generates a hidden field containing a token used to protect against CSRF attacks-->
             {{ form.hidden_tag(form.csrf_token) }}
             <br>{{ form.submit() }}<br><br>
