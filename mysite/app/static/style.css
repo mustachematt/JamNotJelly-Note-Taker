@@ -3,8 +3,18 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
+	border: 5px solid red;
 }
-
+span[class^="dot"]{
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	display: inline-block;
+}
+.dot0{background-color: lightgrey;}
+.dot1{background-color: green;}
+.dot2{background-color: yellow;}
+.dot3{background-color: red;}
 a {
     color: black;
 }

@@ -49,6 +49,11 @@
             <ul>
                 {% for note in notes %}
                     <li>
+						{% if note.priority == 0 %} <span class="dot0"> </span>   
+						{% elif note.priority == 1 %}  <span class="dot1"> </span>   
+						{% elif note.priority == 2 %} <span class="dot2"> </span>   
+						{% elif note.priority == 3 %} <span class="dot3"> </span>   
+						{% endif %}
                         <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
                             <!--only display due date if one exists-->
                             {% if note.due_date %}
