@@ -44,7 +44,7 @@ def load_user(id):
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.now)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     due_date = db.Column(db.DateTime, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     priority = db.Column(db.Integer, default=0)
