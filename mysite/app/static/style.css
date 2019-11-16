@@ -5,6 +5,10 @@
     text-decoration: none;
 	border: 5px solid red;
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 span[class^="dot"]{
 	height: 15px;
 	width: 15px;
@@ -15,6 +19,12 @@ span[class^="dot"]{
 .dot1{background-color: green;}
 .dot2{background-color: yellow;}
 .dot3{background-color: red;}
+<<<<<<< Updated upstream
+=======
+
+li{list-style: none;}
+
+>>>>>>> Stashed changes
 a {
     color: black;
 }
