@@ -52,9 +52,12 @@ def logout():
 def account():
     form = AccountForm(current_user.username, current_user.email)
     if form.validate_on_submit():
+        pw = request.form['password']
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.about_me = form.about_me.data
+        if pw != '':
+            current_user.set_password(form.password.data)
         db.session.commit()
         return redirect(url_for('account'))
     elif request.method == 'GET':

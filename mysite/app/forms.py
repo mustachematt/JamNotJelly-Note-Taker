@@ -50,7 +50,8 @@ class NoteDeleteForm(FlaskForm):
 class AccountForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    about_me = TextAreaField('About Me', validators=[Length(min=0, max=140)])
+    password = PasswordField('Password')
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, original_email, *args, **kwargs):
