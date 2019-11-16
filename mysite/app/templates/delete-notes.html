@@ -40,11 +40,10 @@
     </header>
 
     <div id="main_body">
-        <form action="" method="post">
+        <form action="" method="post" style="height: 100%; padding: 5px; width: 50%; margin: auto auto;">
             <!--generates a hidden field containing a token used to protect against CSRF attacks-->
             {{ form.hidden_tag(form.csrf_token) }}
-            <br>{{ form.submit() }}<br><br>
-
+            <div style="text-align: center; padding: 5px;">{{ form.submit() }}</div>
             <!-- displays notes in a list default sorted by createdatetime desc -->
             <ul>
                 {% for note in notes %}
@@ -63,7 +62,7 @@
                     </li>
 					{{ form.submitSingle(value=note.id) }}
 					{{ form.hiddenID(value = note.id) }}
-					<br>
+					<br><br>
                 {% endfor %}
             </ul>
         </form>
