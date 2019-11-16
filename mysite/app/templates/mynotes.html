@@ -5,7 +5,7 @@
 
 <head>
     <title>My Notes - Jam Transcriptions</title>
-    <link type="text/css" rel="stylesheet" href="/static/style.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/style.css">
     <link rel="icon" sizes="120x120" href="images/JamNotJelly_icon.png">
     <!-- need jqueery and moment for date adjusment -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
@@ -45,18 +45,6 @@
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
         </ul>
-		<style>
-			span[class^="dot"]{
-				height: 15px;
-				width: 15px;
-				border-radius: 50%;
-				display: inline-block;
-			}
-			.dot0{background-color: lightgrey;}
-			.dot1{background-color: green;}
-			.dot2{background-color: yellow;}
-			.dot3{background-color: red;}
-		</style>
     </header>
 
     <div id="note_body">
@@ -103,11 +91,11 @@
             <!-- displays notes in a list default sorted by createdatetime desc -->
             <ul id="note_list">
                 {% for note in notes %}
-                    <li>
-						{% if note.priority == 0 %} <span class="dot0"> </span>   
-						{% elif note.priority == 1 %}  <span class="dot1"> </span>   
-						{% elif note.priority == 2 %} <span class="dot2"> </span>   
-						{% elif note.priority == 3 %} <span class="dot3"> </span>   
+                    <li>  
+						{% if note.priority == 0 %} <span class="dot0"><span class="tooltiptext">No Priority</span></span>   
+						{% elif note.priority == 1 %}  <span class="dot1"><span class="tooltiptext">Low Priority</span></span>   
+						{% elif note.priority == 2 %} <span class="dot2"><span class="tooltiptext">Medium Priority</span></span>   
+						{% elif note.priority == 3 %} <span class="dot3"><span class="tooltiptext">High Priority</span></span>   
 						{% endif %}
                         <i>Added: </i>{{ moment(note.timestamp).format("LLL") }}
                             <!--only display due date if one exists-->
