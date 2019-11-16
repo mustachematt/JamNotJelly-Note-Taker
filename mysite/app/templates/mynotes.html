@@ -8,10 +8,6 @@
 
     <!--This imports the font, we can change this later-->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-<<<<<<< Updated upstream
-    
-=======
->>>>>>> Stashed changes
 </head>
 
 <body id="note_body">
@@ -89,18 +85,11 @@
             <!-- displays notes in a list default sorted by createdatetime desc -->
             <ul id="note_list">
                 {% for note in notes %}
-                    <li>
-<<<<<<< Updated upstream
-						{% if note.priority == 0 %} <span class="dot0"> </span>   
-						{% elif note.priority == 1 %}  <span class="dot1"> </span>   
-						{% elif note.priority == 2 %} <span class="dot2"> </span>   
-						{% elif note.priority == 3 %} <span class="dot3"> </span>   
-=======
+                    <li>  
 						{% if note.priority == 0 %} <span class="dot0"><span class="tooltiptext">No Priority</span></span>   
 						{% elif note.priority == 1 %}  <span class="dot1"><span class="tooltiptext">Low Priority</span></span>   
 						{% elif note.priority == 2 %} <span class="dot2"><span class="tooltiptext">Medium Priority</span></span>   
 						{% elif note.priority == 3 %} <span class="dot3"><span class="tooltiptext">High Priority</span></span>   
->>>>>>> Stashed changes
 						{% endif %}
                         <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
                             <!--only display due date if one exists-->
