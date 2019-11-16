@@ -70,7 +70,7 @@
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                     <!--due date input and submit-->
-                    <p>Due Date: {{ form.due_date(placeholder="dd/mm/yyyy") }} {{ form.submit(id="note_submit") }}
+                    <p>Due Date: {{ form.due_date(placeholder="mm/dd/yyyy") }} {{ form.submit(id="note_submit") }}
                     {% for error in form.due_date.errors %}
                         <span style="color: red;"><br>{{ error }}</span>
                     {% endfor %}</p>
