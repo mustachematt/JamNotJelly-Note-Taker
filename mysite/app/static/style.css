@@ -4,6 +4,49 @@
     padding: 0;
     text-decoration: none;
 }
+<<<<<<< Updated upstream
+=======
+span[class^="dot"]{
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	display: inline-block;
+}
+.tooltiptext {
+	visibility: hidden;
+    position: absolute;
+    width: 120px;
+    background-color: lightgrey;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s;
+	right: 64%;
+}
+.tooltiptext::after {
+	content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+span[class^="dot"]:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dot0{background-color: lightgrey;}
+.dot1{background-color: green;}
+.dot2{background-color: yellow;}
+.dot3{background-color: red;}
+
+li{list-style: none;}
+>>>>>>> Stashed changes
 
 a {
     color: black;
