@@ -40,6 +40,18 @@
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
         </ul>
+		<style>
+			span[class^="dot"]{
+				height: 15px;
+				width: 15px;
+				border-radius: 50%;
+				display: inline-block;
+			}
+			.dot0{background-color: lightgrey;}
+			.dot1{background-color: green;}
+			.dot2{background-color: yellow;}
+			.dot3{background-color: red;}
+		</style>
     </header>
 
     <div id="note_body">
@@ -70,8 +82,13 @@
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                     <!--due date input and submit-->
-                    <p>Due Date: {{ form.due_date(placeholder="mm/dd/yyyy") }} {{ form.submit(id="note_submit") }}
-                    {% for error in form.due_date.errors %}
+                    <p>Due Date: {{ form.due_date(placeholder="mm/dd/yyyy") }}
+                    Priority: {{form.priorityLevel()}}
+					{{ form.submit(id="note_submit") }}
+					{% for error in form.due_date.errors %}
+                        <span style="color: red;"><br>{{ error }}</span>
+                    {% endfor %}
+					{% for error in form.priorityLevel.errors %}
                         <span style="color: red;"><br>{{ error }}</span>
                     {% endfor %}</p>
                 </div>
@@ -82,13 +99,18 @@
             <ul id="note_list">
                 {% for note in notes %}
                     <li>
+						{% if note.priority == 0 %} <span class="dot0"> </span>   
+						{% elif note.priority == 1 %}  <span class="dot1"> </span>   
+						{% elif note.priority == 2 %} <span class="dot2"> </span>   
+						{% elif note.priority == 3 %} <span class="dot3"> </span>   
+						{% endif %}
                         <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
                             <!--only display due date if one exists-->
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
                             {% endif %}
 							<a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
-                        <br>{{ note.body }}
+                        <br>{{ note.body }}<br>
 				</li><br>
                 {% endfor %}
             </ul>

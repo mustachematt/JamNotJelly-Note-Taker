@@ -2,7 +2,7 @@
 from app.models import Note, User
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, DateField, PasswordField, StringField
-from wtforms import SubmitField, TextAreaField, HiddenField
+from wtforms import SubmitField, TextAreaField, HiddenField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional, ValidationError
 
 
@@ -33,8 +33,8 @@ class RegistrationForm(FlaskForm):
 class NoteForm(FlaskForm):
     note = TextAreaField(validators=[DataRequired()])
     due_date = DateField('Due Date', format='%m/%d/%Y', validators=[Optional()])
+    priorityLevel = SelectField('Priority', choices=[(0,'None'),(1,'Low'),(2,'Medium'),(3,'High')], coerce=int)
     submit = SubmitField('Save')
-
     def validate_due_date(self, due_date):
         note = Note.query.filter_by(due_date=due_date.data).first()
         if note is not None:

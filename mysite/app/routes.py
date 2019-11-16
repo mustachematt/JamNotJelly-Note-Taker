@@ -75,7 +75,7 @@ def mynotes():
     #if creating a new note
     if form.validate_on_submit() and noteID is None:
         if 'submit' in request.form:
-            note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
+            note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user, priority=form.priorityLevel.data)
             db.session.add(note)
             db.session.commit()
         return redirect(url_for('mynotes'))
@@ -86,6 +86,7 @@ def mynotes():
         if 'submit' in request.form:
             noteData.body = form.note.data
             noteData.due_date = form.due_date.data
+            noteData.priority = form.priorityLevel.data
             noteData.author = current_user
             db.session.commit()
         return redirect(url_for('mynotes'))
@@ -93,6 +94,7 @@ def mynotes():
     if noteID is not None:
         form.note.data = noteData.body
         form.due_date.data = noteData.due_date
+        form.priorityLevel.data = noteData.priority
     #display note to edit
     return render_template('mynotes.html', form=form, notes=notes)
 
