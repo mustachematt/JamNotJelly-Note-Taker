@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
-	
 }
 
 span[class^="dot"]{
@@ -11,6 +10,7 @@ span[class^="dot"]{
 	width: 15px;
 	border-radius: 50%;
 	display: inline-block;
+	position: relative;
 }
 .tooltiptext {
 	visibility: hidden;
@@ -22,8 +22,9 @@ span[class^="dot"]{
     padding: 5px 0;
     border-radius: 6px;
     opacity: 0;
+	right: 100%;
     transition: opacity 0.3s;
-	right: 64%;
+
 }
 .tooltiptext::after {
 	content: "";
