@@ -108,8 +108,8 @@
                             {% endif %}
                             <a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
                         <br>
-                        <span style="font-weight: bold;">{{note.title}}</span> <br>
-                        {{ note.body }}<br>
+                        <span style="font-weight: bold;">{{note.title}}</span> <br> 
+                        <pre>{{note.body}}</pre><br>
 				</li><br>
                 {% endfor %}
             </ul>
