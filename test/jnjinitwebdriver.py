@@ -14,9 +14,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 driver = webdriver.Chrome(executable_path=r'/home/travis/virtualenv/python3.6.7/bin/chromedriver.exe')
 
 # For testing on PA
-driver.get("https://mustachematt.pythonanywhere.com")
+#driver.get("https://mustachematt.pythonanywhere.com")
 # For testing on local server
-#driver.get("http:localhost:5000")
+driver.get("http:localhost:5000")
 assert "Jelly Lists" in driver.title
 
 #signUpButton = driver.find_element_by_id("signUpButton")
