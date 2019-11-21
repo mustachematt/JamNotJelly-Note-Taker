@@ -10,7 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 # For testing on local server
 #driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
 # For testing on Travis-CI
-driver = webdriver.Chrome(executable_path=r'/home/travis/virtualenv/python3.6.7/bin/chromedriver.exe'
+driver = webdriver.Chrome(executable_path=r'/home/travis/virtualenv/python3.6.7/bin/chromedriver.exe')
 
 #driver.get("https://mustachematt.pythonanywhere.com")
 driver.get("http:localhost:5000")
