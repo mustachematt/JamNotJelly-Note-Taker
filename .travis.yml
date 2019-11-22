@@ -6,7 +6,10 @@ before_script:
 - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.6.3/bin/
 - export CHROME_BIN=chromium-browser
 
-script: pytest
+script: 
+- whereis google-chrome-stable
+- whereis chromedriver
+- pytest
 
 dist: trusty
 
