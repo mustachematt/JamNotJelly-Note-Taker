@@ -1,0 +1,44 @@
+you'll need to pip install unnittest and behave and pytest (optionally)
+these tests assume that your computer has the chromedriver installed and knows where its at
+(add to system path variables)
+if you get an error about it you might need to enter you path to chromdriver manually in the test
+
+
+
+To run all unittests(behaivoral) go to test directory and write in cmd line
+"python unittest -m "
+to run a specific test do
+"python unittest test.py"
+or you could also do 
+python test.py
+
+you can also download pytest and run all the python tests using the cmd "pytest" in the test directory
+
+
+
+
+behave tests have a scenario written in semi natural language and steps which 
+implement those scenarios with code
+
+To run all behave tests(also behaivoral)
+got to features directory and use the cmd "behave"
+to run a aspecific test write behave + steps test file name
+"behave loginsteps"
+you might need to make that "loginsteps.py"
+
+
+
+We have 1 non behaivoral test that tests password hashing that can be found in the
+mysite directory and its called test2.py
+we have not really done much backend testing
+Technically as people write new features they should be writing their own 
+unit tests for those features (aka TDD)
+going backward and doing it feels like a waste of time but if 
+you think of general important test we could put into our 
+continuous integration/pull request tests please tell us and we'll write them
+
+
+
+
+
+

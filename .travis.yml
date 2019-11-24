@@ -1,0 +1,21 @@
+language: python
+
+before_script:
+- echo $PATH
+- wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
+- unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.6.3/bin/
+- export CHROME_BIN=chromium-browser
+
+script: 
+- whereis google-chrome-stable
+- whereis chromedriver
+- pytest
+
+dist: trusty
+
+addons: 
+  chrome: stable
+  
+before_install:
+  - # start your web application and listen on `localhost`
+  - google-chrome-stable --headless --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost &
