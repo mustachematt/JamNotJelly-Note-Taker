@@ -205,6 +205,7 @@ textarea {
 
 #note_avatar {
     width: 50px;
+    border-radius: 25px;
 }
 
 #note_body {
@@ -254,3 +255,47 @@ textarea {
 #note_submit:hover{
     background-color: rgba(255, 0, 84, 0.4) !important;
 } 
+
+#account_form {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #FFB2BC;
+}
+
+#acc_table {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #FFB2BC;
+}
+
+#account_username {
+    border: none;
+    font-size: 25px;
+    padding: 2px;
+    width: 100%;
+    border-radius: 5px;
+    color: #595959;
+}
+
+#about_me {
+    width: 100%;
+    font-size: 20px;
+    border-radius: 5px;
+    color: #595959;
+    border: none;
+    padding: 2px;
+}
+
+#account_submit {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 25px;
+    
+}
