@@ -10,7 +10,7 @@ before_install:
 before_script:
 - echo $PATH
 - wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
-- unzip chromedriver_linux64.zip -d /home/travis/bin/
+- unzip chromedriver_linux64.zip -d /usr/bin/
 - export CHROME_BIN=chromium-browser
 
 script: 
