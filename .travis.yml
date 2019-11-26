@@ -11,7 +11,8 @@ before_script:
 - echo $PATH
 - wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
 - unzip chromedriver_linux64.zip -d /home/travis/bin/
-- export CHROME_BIN=/usr/bin/chromium-browser
+- sudo mv /usr/bin/google-chrome-stable /home/travis/bin/google-chrome
+- export CHROME_BIN=/home/travis/bin/google-chrome
 
 script: 
 - which google-chrome
