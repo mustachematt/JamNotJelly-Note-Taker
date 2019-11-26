@@ -14,7 +14,7 @@ before_script:
 - export CHROME_BIN=chromium-browser
 - cd /usr/bin
 - sudo mv google-chrome-stable google-chrome
-- cd
+- cd -
 
 script: 
 - which google-chrome
