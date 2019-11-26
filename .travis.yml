@@ -13,7 +13,7 @@ before_script:
 - unzip chromedriver_linux64.zip -d /home/travis/bin/
 - export CHROME_BIN=chromium-browser
 - cd /usr/bin
-- mv google-chrome-stable google-chrome
+- sudo mv google-chrome-stable google-chrome
 - cd
 
 script: 
