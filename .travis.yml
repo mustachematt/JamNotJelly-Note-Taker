@@ -7,7 +7,7 @@ before_install:
   - # start your web application and listen on `localhost`
   - #google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost &
   - #google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost
-  - google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 &
+  - google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost &
 
 before_script:
 - echo $PATH
