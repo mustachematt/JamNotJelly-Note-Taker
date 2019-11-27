@@ -284,6 +284,24 @@ textarea {
     color: #595959;
 }
 
+#account_email {
+    border: none;
+    font-size: 25px;
+    padding: 2px;
+    width: 100%;
+    border-radius: 5px;
+    color: #595959;
+}
+
+#account_password {
+    border: none;
+    font-size: 25px;
+    padding: 2px;
+    width: 100%;
+    border-radius: 5px;
+    color: #595959;
+}
+
 #about_me {
     width: 100%;
     font-size: 20px;
