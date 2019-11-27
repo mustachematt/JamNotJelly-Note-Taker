@@ -12,7 +12,7 @@ from selenium import webdriver
 
 
 
-driver=webdriver.Chrome(chrome_driver_path)
+driver=webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
 class test_HomePageLinks(unittest.TestCase):
 
     def test_0HomePageLinks(self):

@@ -9,8 +9,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
 
-#driver.get("https://mustachematt.pythonanywhere.com")
-driver.get("http:localhost:5000")
+driver.get("https://mustachematt.pythonanywhere.com")
+#driver.get("http:localhost:5000")
 assert "Jelly Lists" in driver.title
 
 loginButton = driver.find_element_by_id("loginButton")
