@@ -24,7 +24,9 @@ script:
 - which chromedriver
 - cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/mysite
 - flask run &
-- cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/features
-- behave
+- #cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/features
+- #behave
+- cd cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/
+- pytest
 
 dist: trusty
