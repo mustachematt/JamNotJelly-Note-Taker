@@ -10,7 +10,7 @@ before_install:
 before_script:
 - echo $PATH
 - wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
-- sudo unzip chromedriver_linux64.zip /usr/bin
+- sudo unzip chromedriver_linux64.zip -d /usr/bin/google-chrome
 - sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
 - export CHROME_BIN=/usr/bin/google-chrome
 
