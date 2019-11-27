@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="overflow: hidden;background-color: #FF8797;">
     <header>
         <!--This is the bar at the top of the site-->
         <!--any main links should be placed within the nav-->
@@ -43,34 +43,52 @@
     </header>
 
     <div>
-        <table>
+        <table id="acc_table">
             <tr valign="top">
-                <td><img src="{{ current_user.avatar(128) }}"></td>
+                <td><img src="{{ current_user.avatar(128) }}" id="note_avatar"></td>
                 <td>
                     <h1>{{ current_user.username }}</h1>
                     {% if current_user.about_me %}<p>{{ current_user.about_me }}</p>{% endif %}
                 </td>
             </tr>
         </table>
-        <hr>
+        
+        
+    </div>
+
+    <div id="account_form">
         <h2>Edit Profile</h2>
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <p>
                 Username:<br>
-                {{ form.username(size=36) }}<br>
+                {{ form.username(size=36, id="account_username") }}<br>
                 {% for error in form.username.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
+                Email:<br>
+                {{ form.email(size=36, id="account_email") }}<br>
+                {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                Change Password:<br>
+                {{ form.password(size=36, id="account_password") }}
+                {% for error in form.password.errors %}
+                <span style="color: red;"><br>{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
                 About Me:<br>
-                {{ form.about_me(cols=50, rows=4) }}<br>
+                {{ form.about_me(cols=50, rows=4, id="about_me") }}<br>
                 {% for error in form.about_me.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
-            <p>{{ form.submit() }}</p>
+            <p>{{ form.submit(id="account_submit") }}</p>
         </form>
     </div>
 

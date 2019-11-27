@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 
+
+
 <head>
     <title>My Notes - Jam Transcriptions</title>
-    <link type="text/css" rel="stylesheet" href="/static/style.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/style.css">
     <link rel="icon" sizes="120x120" href="images/JamNotJelly_icon.png">
+    <!-- need jqueery and moment for date adjusment -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    {{ moment.include_moment() }}
 
     <!--This imports the font, we can change this later-->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-    
 </head>
 
 <body id="note_body">
@@ -59,19 +63,29 @@
         <form action="" method="post" id="notes">
             <div id="left_side">
                 <div id="note_input">
-                    <p>What would you like to keep track of? Write it below:</p>
+                    <p>What would you like to keep track of? Write it below:</p><br>
                     <!--generates a hidden field containing a token used to protect against CSRF attacks-->
                     {{ form.hidden_tag() }}
 
                     <!--enter/validate input-->
-                    <!--note input-->
+                    
+                    <!--note title input-->
+                    <p>Title:{{form.title(style= "width:50%;", id="title_textbox")}}</p>
+                  
+                    <!--note body input-->
+                   
                     {{ form.note(style="width: 80%;",rows=10, id="note_textbox") }}<br>
                     {% for error in form.note.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                     <!--due date input and submit-->
-                    <p>Due Date: {{ form.due_date(placeholder="dd/mm/yyyy") }} {{ form.submit(id="note_submit") }}
-                    {% for error in form.due_date.errors %}
+                    <p>Due Date: {{ form.due_date(placeholder="mm/dd/yyyy") }}
+                    Priority: {{form.priorityLevel()}}
+					{{ form.submit(id="note_submit") }}
+					{% for error in form.due_date.errors %}
+                        <span style="color: red;"><br>{{ error }}</span>
+                    {% endfor %}
+					{% for error in form.priorityLevel.errors %}
                         <span style="color: red;"><br>{{ error }}</span>
                     {% endfor %}</p>
                 </div>
@@ -81,14 +95,26 @@
             <!-- displays notes in a list default sorted by createdatetime desc -->
             <ul id="note_list">
                 {% for note in notes %}
-                    <li>
-                        <i>Added: </i>{{ note.timestamp.strftime('%m/%d/%Y - %I:%M %p') }}
+                    <li>  
+						{% if note.priority == 0 %} <span class="dot0"><span class="tooltiptext">No Priority</span></span>   
+						{% elif note.priority == 1 %}  <span class="dot1"><span class="tooltiptext">Low Priority</span></span>   
+						{% elif note.priority == 2 %} <span class="dot2"><span class="tooltiptext">Medium Priority</span></span>   
+						{% elif note.priority == 3 %} <span class="dot3"><span class="tooltiptext">High Priority</span></span>   
+						{% endif %}
+                        <i>Added: </i>{{ moment(note.timestamp).format("LLL") }}
                             <!--only display due date if one exists-->
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
                             {% endif %}
+<<<<<<< HEAD
 							<a name= "edit{{note.id}}" style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
                         <br>{{ note.body }}
+=======
+                            <a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
+                        <br>
+                        <span style="font-weight: bold;">{{note.title}}</span> <br> 
+                        <pre style="white-space: pre-wrap;">{{note.body}}</pre><br>
+>>>>>>> a20ae4c26ae7cd916407d400158b77add8390454
 				</li><br>
                 {% endfor %}
             </ul>
@@ -96,4 +122,5 @@
     </div>
 
 </body>
+<script src="/static/time_change.js"></script>
 </html> 

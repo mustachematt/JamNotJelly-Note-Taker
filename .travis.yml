@@ -1,0 +1,22 @@
+language: python
+
+addons: 
+  chrome: stable
+
+before_install:
+  - # start your web application and listen on `localhost`
+  - google-chrome-stable --headless --no-sandbox --disable-gpu
+
+before_script:
+- echo $PATH
+- wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
+- sudo unzip chromedriver_linux64.zip -d /usr/bin
+- sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
+- export CHROME_BIN=/usr/bin/google-chrome
+
+script: 
+- which google-chrome
+- which chromedriver
+- pytest
+
+dist: trusty

@@ -1,6 +1,8 @@
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db
-from app.forms import AccountForm, LoginForm, NoteForm, RegistrationForm, NoteDeleteForm
+from app.email import send_password_reset_email
+from app.forms import AccountForm, LoginForm, NoteForm, NoteDeleteForm
+from app.forms import RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import Note, User
 from werkzeug.urls import url_parse
@@ -50,16 +52,20 @@ def logout():
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    form = AccountForm(current_user.username)
+    form = AccountForm(current_user.username, current_user.email)
     if form.validate_on_submit():
+        pw = request.form['password']
         current_user.username = form.username.data
+        current_user.email = form.email.data
         current_user.about_me = form.about_me.data
+        if pw != '':
+            current_user.set_password(form.password.data)
         db.session.commit()
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
+        form.email.data = current_user.email
         form.about_me.data = current_user.about_me
-    notes = current_user.get_notes().all()
     return render_template('account.html', form=form)
 
 
@@ -71,24 +77,29 @@ def mynotes():
     #if creating a new note
     if form.validate_on_submit() and noteID is None:
         if 'submit' in request.form:
-            note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user)
+            note = Note(body=form.note.data, due_date=form.due_date.data, author=current_user, priority=form.priorityLevel.data, title=form.title.data) #changed
             db.session.add(note)
             db.session.commit()
         return redirect(url_for('mynotes'))
     notes = current_user.get_notes().all()
-    #update existing note
+    #will run when click submit after editing an existing note
     noteData = Note.query.filter_by(id=noteID).first()
     if form.validate_on_submit() and noteID is not None:
         if 'submit' in request.form:
             noteData.body = form.note.data
             noteData.due_date = form.due_date.data
+            noteData.priority = form.priorityLevel.data
             noteData.author = current_user
+            noteData.title = form.title.data #changed
             db.session.commit()
         return redirect(url_for('mynotes'))
-    #if editing a note, do the following. Will not run if submitting a new note
+    #This puts the existing notes data into the note field for editing
     if noteID is not None:
         form.note.data = noteData.body
         form.due_date.data = noteData.due_date
+        form.priorityLevel.data = noteData.priority
+        form.title.data = noteData.title
+        
     #display note to edit
     return render_template('mynotes.html', form=form, notes=notes)
 
@@ -132,6 +143,34 @@ def register():
         return redirect(url_for('mynotes'))
     return render_template('register.html', form=form)
 
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('mynotes'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request.html',
+                           title='Reset Password', form=form)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('mynotes'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('homepage'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)
 
 @app.route('/design')
 def design():
