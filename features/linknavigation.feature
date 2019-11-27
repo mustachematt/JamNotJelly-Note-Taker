@@ -1,7 +1,7 @@
 Feature: Check that all the links work properly
 
     Scenario: Verify user can get to the login page by
-        Given I am on "http://localhost:5000/"
+        Given I am on "http://localhost:9222/"
         And I see "Jelly Lists, Digital List App" in the title
         When I click the "loginButton"
         Then I should be on the "Login" page
