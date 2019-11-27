@@ -26,7 +26,7 @@ script:
 - flask run &
 - #cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/features
 - #behave
-- cd cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/
+- cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker
 - pytest
 
 dist: trusty
