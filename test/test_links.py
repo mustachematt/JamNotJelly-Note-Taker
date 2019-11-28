@@ -10,9 +10,17 @@ from selenium import webdriver
 #chrome_driver_path = ""
 
 
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
 
 
-driver=webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
+#driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
+driver = webdriver.Chrome(options=chrome_options)
+
+#driver=webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
 class test_HomePageLinks(unittest.TestCase):
 
     def test_0HomePageLinks(self):
