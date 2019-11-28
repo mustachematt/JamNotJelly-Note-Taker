@@ -18,8 +18,8 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(options=chrome_options)
 
-driver.get("https://mustachematt.pythonanywhere.com")
-#driver.get("http:localhost:5000")
+#driver.get("https://mustachematt.pythonanywhere.com")
+driver.get("http:localhost:5000")
 assert "Jelly Lists" in driver.title
 
 loginButton = driver.find_element_by_id("loginButton")
