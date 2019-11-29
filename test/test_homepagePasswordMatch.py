@@ -7,8 +7,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.action_chains import ActionChains
 
-driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
+from selenium.webdriver.chrome.options import Options
 
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+
+
+#driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
+driver = webdriver.Chrome(options=chrome_options)
 #driver.get("https://mustachematt.pythonanywhere.com")
 driver.get("http:localhost:5000")
 assert "Jelly Lists" in driver.title

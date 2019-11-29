@@ -106,10 +106,15 @@
                             {% if note.due_date %}
                                 | <b>Due: </b>{{ note.due_date.strftime('%m/%d/%Y') }}
                             {% endif %}
+<<<<<<< HEAD
+							<a name= "edit{{note.id}}" style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
+                        <br>{{ note.body }}
+=======
                             <a style="color: darkblue; background-color: lightgrey; padding: 2px; font-size: 14px; border-radius: 5px" href="?noteID={{note.id}}">Edit</a>
                         <br>
-                        <span style="font-weight: bold;">{{note.title}}</span> <br>
-                        {{ note.body }}<br>
+                        <span style="font-weight: bold;">{{note.title}}</span> <br> 
+                        <pre style="white-space: pre-wrap;">{{note.body}}</pre><br>
+>>>>>>> a20ae4c26ae7cd916407d400158b77add8390454
 				</li><br>
                 {% endfor %}
             </ul>

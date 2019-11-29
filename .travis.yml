@@ -1,3 +1,32 @@
 language: python
 
-script: pytest
+addons: 
+  chrome: stable
+
+before_install:
+  - # start your web application and listen on `localhost`
+  - #google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - #google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost
+  - google-chrome-stable --headless  --no-sandbox --disable-gpu --remote-debugging-port=9222 http://localhost &
+
+before_script:
+- echo $PATH
+- sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
+- export CHROME_BIN=/usr/bin/google-chrome
+- wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
+- sudo unzip chromedriver_linux64.zip -d /usr/bin
+- echo "export PATH=$PATH:$HOME/bin" >> $HOME/.bash_profile
+
+
+
+script: 
+- which google-chrome
+- which chromedriver
+- cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/mysite
+- flask run &
+- #cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker/features
+- #behave
+- cd /home/travis/build/mustachematt/JamNotJelly-Note-Taker
+- pytest
+
+dist: trusty

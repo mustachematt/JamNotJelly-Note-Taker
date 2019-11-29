@@ -6,8 +6,17 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
 
-driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
+# For testing on local server
+#driver = webdriver.Chrome(executable_path=r'C:/Program Files (x86)/Google/Chrome/chromedriver.exe')
+# For testing on Travis-CI
+#executable_path=r'/usr/bin/chromedriver'
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 
 #driver.get("https://mustachematt.pythonanywhere.com")
 driver.get("http:localhost:5000")
