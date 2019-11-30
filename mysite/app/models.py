@@ -28,8 +28,8 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def get_notes(self):
-        return Note.query.filter(Note.user_id == self.id).order_by(
-            Note.timestamp.desc())
+        return (Note.query.filter(Note.user_id == self.id).order_by(
+            Note.priority.desc())).order_by(Note.timestamp.desc())
     
     def get_note_count(self):
         return Note.query.filter(Note.user_id == self.id).count()
